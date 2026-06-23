@@ -1,6 +1,9 @@
 import { FaultLog }
 from "../models/FaultLog.js";
 
+import { Report }
+from "../models/Report.js";
+
 import { asyncHandler }
 from "../utils/asyncHandler.js";
 

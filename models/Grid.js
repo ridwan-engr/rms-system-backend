@@ -20,12 +20,7 @@ const gridSchema =
         default: 50
       },
 
-      importPowerKW: {
-        type: Number,
-        default: 0
-      },
-
-      exportPowerKW: {
+      powerAvailable: {
         type: Number,
         default: 0
       },

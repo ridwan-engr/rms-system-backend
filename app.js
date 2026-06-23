@@ -13,6 +13,7 @@ import forecastRoutes from "./routes/forecastRoutes.js";
 import energyRoutes from "./routes/energyRoutes.js";
 import faultRoutes from "./routes/faultRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
+import gridRoutes from "./routes/gridRoutes.js";
 
 import {
   notFoundHandler,
@@ -142,6 +143,11 @@ app.use(
 app.use(
   "/api/reports",
   reportRoutes
+);
+
+app.use(
+  "/api/grid",
+  gridRoutes
 );
 
 /*

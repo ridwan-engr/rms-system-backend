@@ -42,7 +42,7 @@ const reportSchema =
         default: 0
       },
 
-      operatingCost: {
+      operatingCostPerKwh: {
         type: Number,
         default: 0
       },
