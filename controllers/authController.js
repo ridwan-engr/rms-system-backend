@@ -10,6 +10,7 @@ import { generateToken } from "../utils/jwt.js";
 
 
 export const register = asyncHandler(async (req, res) => {
+
   const {
     name,
     email,
@@ -17,33 +18,57 @@ export const register = asyncHandler(async (req, res) => {
     role = "operator"
   } = req.body;
 
-  const existingUser = await User.findOne({
-    email: email.toLowerCase()
-  });
+  const existingUser =
+    await User.findOne({
+      email: email.toLowerCase()
+    });
 
   if (existingUser) {
-    throw new ApiError(409, "Email already exists");
+    throw new ApiError(
+      409,
+      "Email already exists"
+    );
   }
 
   const passwordHash =
-    await bcrypt.hash(password, 12);
+    await bcrypt.hash(
+      password,
+      12
+    );
 
-  const user = await User.create({
-    name,
-    email: email.toLowerCase(),
-    passwordHash,
-    role
-  });
+  const user =
+    await User.create({
+      name,
+      email: email.toLowerCase(),
+      passwordHash,
+      role
+    });
+
+  const token =
+    generateToken({
+      userId: user._id.toString(),
+      role: user.role
+    });
 
   res.status(201).json({
     success: true,
-    token: generateToken(user),
-    user
+    token,
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    }
   });
+
 });
 
 export const login = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+
+  const {
+    email,
+    password
+  } = req.body;
 
   const user =
     await User.findOne({
@@ -51,7 +76,10 @@ export const login = asyncHandler(async (req, res) => {
     }).select("+passwordHash");
 
   if (!user) {
-    throw new ApiError(401, "Invalid credentials");
+    throw new ApiError(
+      401,
+      "Invalid credentials"
+    );
   }
 
   const isMatch =
@@ -61,19 +89,36 @@ export const login = asyncHandler(async (req, res) => {
     );
 
   if (!isMatch) {
-    throw new ApiError(401, "Invalid credentials");
+    throw new ApiError(
+      401,
+      "Invalid credentials"
+    );
   }
 
-  res.json({
+  const token =
+    generateToken({
+      userId: user._id.toString(),
+      role: user.role
+    });
+
+  res.status(200).json({
     success: true,
-    token: generateToken(user),
-    user
+    token,
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    }
   });
+
 });
 
 export const me = asyncHandler(async (req, res) => {
-  res.json({
+
+  res.status(200).json({
     success: true,
     user: req.user
   });
+
 });
