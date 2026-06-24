@@ -1,5 +1,7 @@
 import { FaultLog }
 from "../models/FaultLog.js";
+import { ApiError }
+from "../utils/ApiError.js";
 
 import { asyncHandler }
 from "../utils/asyncHandler.js";
@@ -40,6 +42,13 @@ export const resolveFault =
         req.params.id
       );
 
+    if (!fault) {
+      return res.status(404).json({
+        success: false,
+        message: "Fault not found"
+      });
+    }
+
     fault.status =
       "resolved";
 
@@ -53,3 +62,4 @@ export const resolveFault =
       fault
     });
   });
+

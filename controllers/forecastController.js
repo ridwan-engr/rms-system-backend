@@ -1,6 +1,6 @@
-import { Generator } from "../models/Generator.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import {Forecast} from "../models/Forecast.js";
+import {ApiError} from "../utils/ApiError.js";
 
 export const createForecast =
   asyncHandler(async (req, res) => {
