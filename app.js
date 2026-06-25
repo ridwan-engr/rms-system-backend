@@ -14,6 +14,8 @@ import energyRoutes from "./routes/energyRoutes.js";
 import faultRoutes from "./routes/faultRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 import gridRoutes from "./routes/gridRoutes.js";
+import analyticsRoutes from "./routes/analyticsRoutes.js";
+
 
 import {
   notFoundHandler,
@@ -148,6 +150,11 @@ app.use(
 app.use(
   "/api/grid",
   gridRoutes
+);
+
+app.use(
+  "/api/analytics",
+  analyticsRoutes
 );
 
 /*

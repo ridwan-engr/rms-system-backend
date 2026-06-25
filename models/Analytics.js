@@ -1,4 +1,8 @@
 import mongoose from "mongoose";
+import { ens, saidi, saifi, caidi, 
+    lolp, resilienceIndex, 
+    reliabilityIndex, recoveryTime, criticalLoadServed
+} from "../services/analyticsService.js";
 
 const analyticsSchema =
   new mongoose.Schema(
@@ -33,6 +37,11 @@ const analyticsSchema =
         default: 0
       },
 
+      reliabilityIndex: {
+        type: Number,
+        default: 0
+      },
+
       recoveryTime: {
         type: Number,
         default: 0
@@ -43,28 +52,12 @@ const analyticsSchema =
         default: 0
       },
 
-      energyMix: {
-        solar: {
+        caidi: {
           type: Number,
           default: 0
         },
-
-        battery: {
-          type: Number,
-          default: 0
-        },
-
-        generator: {
-          type: Number,
-          default: 0
-        },
-
-        grid: {
-          type: Number,
-          default: 0
-        }
-      }
     },
+    
     {
       timestamps: true
     }

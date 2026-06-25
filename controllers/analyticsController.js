@@ -1,102 +1,42 @@
 import { asyncHandler }
 from "../utils/asyncHandler.js";
+import { Analytics } from "../models/Analytics.js";
 
-import {
-  calculateSAIDI,
-  calculateSAIFI,
-  calculateENS,
-  calculateLOLP,
-  calculateRecoveryTime,
-  calculateCriticalLoadServed,
-  calculateResilienceIndex,
-  calculateEnergyMix
-}
-from "../services/analyticsService.js";
+export const createAnalytics =
+  asyncHandler(async (req, res) => {
 
-export const getSAIDI =
-asyncHandler(async (req, res) => {
+    const analytics =
+      await Analytics.create(req.body);
+
+    res.status(201).json({
+      success: true,
+      battery
+    });
+  });
+
+export const getAnalytics =
+  asyncHandler(async (req, res) => {
+
+    const analytics =
+      await Analytics.find()
+      .populate("siteId");
+
+    res.json({
+      success: true,
+      batteries
+    });
+  });
+
+export const updateAnalytics = asyncHandler(async (req, res) => {
+  const analytics =
+    await Analytics.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
 
   res.json({
     success: true,
-    saidi:
-      await calculateSAIDI()
+    analytics
   });
-
-});
-
-export const getSAIFI =
-asyncHandler(async (req, res) => {
-
-  res.json({
-    success: true,
-    saifi:
-      await calculateSAIFI()
-  });
-
-});
-
-export const getENS =
-asyncHandler(async (req, res) => {
-
-  res.json({
-    success: true,
-    ens:
-      await calculateENS()
-  });
-
-});
-
-export const getLOLP =
-asyncHandler(async (req, res) => {
-
-  res.json({
-    success: true,
-    lolp:
-      await calculateLOLP()
-  });
-
-});
-
-export const getRecoveryTime =
-asyncHandler(async (req, res) => {
-
-  res.json({
-    success: true,
-    recovery:
-      await calculateRecoveryTime()
-  });
-
-});
-
-export const getCriticalLoad =
-asyncHandler(async (req, res) => {
-
-  res.json({
-    success: true,
-    criticalLoadServed:
-      await calculateCriticalLoadServed()
-  });
-
-});
-
-export const getResilience =
-asyncHandler(async (req, res) => {
-
-  res.json({
-    success: true,
-    resilience:
-      await calculateResilienceIndex()
-  });
-
-});
-
-export const getEnergyMix =
-asyncHandler(async (req, res) => {
-
-  res.json({
-    success: true,
-    energyMix:
-      await calculateEnergyMix()
-  });
-
 });

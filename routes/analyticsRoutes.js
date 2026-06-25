@@ -1,15 +1,9 @@
 import { Router }
 from "express";
 
-import {
-  getSAIDI,
-  getSAIFI,
-  getENS,
-  getLOLP,
-  getRecoveryTime,
-  getCriticalLoad,
-  getResilience,
-  getEnergyMix
+import {createAnalytics, 
+    getAnalytics,
+    updateAnalytics
 }
 from "../controllers/analyticsController.js";
 
@@ -22,51 +16,21 @@ const router =
   Router();
 
 router.get(
-  "/saidi",
+  "/analytics",
   requireAuth,
-  getSAIDI
+  getAnalytics
 );
 
-router.get(
-  "/saifi",
+router.post(
+  "/analytics",
   requireAuth,
-  getSAIFI
+  createAnalytics
 );
 
-router.get(
-  "/ens",
+router.patch(
+  "/analytics/:id",
   requireAuth,
-  getENS
-);
-
-router.get(
-  "/lolp",
-  requireAuth,
-  getLOLP
-);
-
-router.get(
-  "/recovery",
-  requireAuth,
-  getRecoveryTime
-);
-
-router.get(
-  "/critical-load",
-  requireAuth,
-  getCriticalLoad
-);
-
-router.get(
-  "/resilience",
-  requireAuth,
-  getResilience
-);
-
-router.get(
-  "/energy-mix",
-  requireAuth,
-  getEnergyMix
+  updateAnalytics
 );
 
 export default router;
