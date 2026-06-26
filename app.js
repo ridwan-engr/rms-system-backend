@@ -34,7 +34,22 @@ app.use(helmet());
 
 app.use(
   cors({
-    origin: "*",
+    origin: [
+      "http://localhost:5173",
+      "https://hemap-frontend-46ki.onrender.com"
+    ],
+    methods: [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE",
+      "OPTIONS"
+    ],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization"
+    ],
     credentials: true
   })
 );
@@ -156,15 +171,6 @@ app.use(
   "/api/analytics",
   analyticsRoutes
 );
-
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://https://hemap-remote.onrender.com"
-  ],
-  credentials: true
-}));
-
 /*
 |--------------------------------------------------------------------------
 | Error Handling
