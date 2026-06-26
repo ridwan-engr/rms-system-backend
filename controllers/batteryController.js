@@ -9,6 +9,7 @@ export const createBattery =
 
     res.status(201).json({
       success: true,
+      count: battery.length,
       battery
     });
   });
@@ -22,6 +23,7 @@ export const getBatteries =
 
     res.json({
       success: true,
+      count: batteries.length,
       batteries
     });
   });

@@ -7,6 +7,7 @@ export const createSite = asyncHandler(async (req, res) => {
 
   res.status(201).json({
     success: true,
+    count: sites.length,
     site
   });
 });
@@ -16,6 +17,7 @@ export const getSites = asyncHandler(async (req, res) => {
 
   res.json({
     success: true,
+    count: sites.length,
     sites
   });
 });
@@ -30,6 +32,7 @@ export const getSite = asyncHandler(async (req, res) => {
 
   res.json({
     success: true,
+    count: sites.length,
     site
   });
 });
@@ -44,6 +47,7 @@ export const updateSite = asyncHandler(async (req, res) => {
 
   res.json({
     success: true,
+    count: sites.length,
     site
   });
 });
@@ -55,6 +59,7 @@ export const deleteSite = asyncHandler(async (req, res) => {
 
   res.json({
     success: true,
+    count: sites.length,
     message: "Site deleted"
   });
 });

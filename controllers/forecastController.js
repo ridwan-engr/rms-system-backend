@@ -10,6 +10,7 @@ export const createForecast =
 
     res.status(201).json({
       success: true,
+      count: forecast.length,
       forecast
     });
   });
@@ -23,6 +24,7 @@ export const getForecasts =
 
     res.json({
       success: true,
+      count: forecasts.length,
       forecasts
     });
   });
@@ -44,6 +46,7 @@ export const getForecasts =
 
     res.status(200).json({
       success: true,
+      count: forecast.length,
       forecast
     });
 
@@ -66,6 +69,7 @@ export const getForecasts =
 
     res.status(200).json({
       success: true,
+      count: forecast.length,
       message:
         "Forecast deleted successfully"
     });

@@ -51,6 +51,7 @@ export const register = asyncHandler(async (req, res) => {
 
   res.status(201).json({
     success: true,
+    count: user.length,
     token,
     user: {
       id: user._id,
@@ -105,6 +106,7 @@ export const login = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     success: true,
+    count: user.length,
     token,
     user: {
       id: user._id,
@@ -120,6 +122,7 @@ export const me = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     success: true,
+    count: req.user.length,
     user: req.user
   });
 

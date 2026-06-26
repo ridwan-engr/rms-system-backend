@@ -12,6 +12,7 @@ export const createEnergyRecord =
 
     res.status(201).json({
       success: true,
+      count: record.length,
       record
     });
   });
@@ -26,6 +27,7 @@ export const getEnergyRecords =
 
     res.json({
       success: true,
+      count: records.length,
       records
     });
   });

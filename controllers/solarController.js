@@ -9,6 +9,7 @@ export const createSolarPlant =
 
     res.status(201).json({
       success: true,
+      count: solar.length,
       solar
     });
   });
@@ -22,6 +23,7 @@ export const getSolarPlants =
 
     res.json({
       success: true,
+      count: solar.length,
       solar
     });
   });

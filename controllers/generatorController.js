@@ -9,6 +9,7 @@ export const createGenerator =
 
     res.status(201).json({
       success: true,
+      count: generator.length,
       generator
     });
   });
@@ -22,6 +23,7 @@ export const getGenerators =
 
     res.json({
       success: true,
+      count: generators.length,
       generators
     });
   });

@@ -13,6 +13,7 @@ export const createGridRecord =
 
     res.status(201).json({
       success: true,
+      count: grid.length,
       message:
         "Grid record created successfully",
       grid
@@ -61,6 +62,7 @@ export const getGridRecord =
 
     res.status(200).json({
       success: true,
+      count: grid.length,
       grid
     });
 
@@ -90,6 +92,7 @@ export const updateGridRecord =
 
     res.status(200).json({
       success: true,
+      count: grid.length,
       message:
         "Grid record updated successfully",
       grid
@@ -116,6 +119,7 @@ export const deleteGridRecord =
 
     res.status(200).json({
       success: true,
+      count: grid.length,
       message:
         "Grid record deleted successfully"
     });
@@ -137,6 +141,7 @@ export const getGridStatus =
 
     res.status(200).json({
       success: true,
+      count: totalRecords,
       totalRecords,
       outages,
       availability:

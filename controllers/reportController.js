@@ -15,6 +15,7 @@ export const createReport =
 
     res.status(201).json({
       success: true,
+      count: reports.length,
       report
     });
   });
@@ -31,6 +32,7 @@ export const getReports =
 
     res.json({
       success: true,
+      count: reports.length,
       reports
     });
   });
@@ -60,6 +62,13 @@ export const getReport =
 
     res.json({
       success: true,
+      count: reports.length,
       report
     });
   });
+
+export const resolveReport =
+  asyncHandler(async (req, res) => {
+      report
+    });
+  

@@ -10,7 +10,8 @@ export const createAnalytics =
 
     res.status(201).json({
       success: true,
-      battery
+      count: analytics.length,
+      analytics
     });
   });
 
@@ -23,7 +24,8 @@ export const getAnalytics =
 
     res.json({
       success: true,
-      batteries
+        count: analytics.length,
+      analytics
     });
   });
 
@@ -37,6 +39,7 @@ export const updateAnalytics = asyncHandler(async (req, res) => {
 
   res.json({
     success: true,
+    count: analytics.length,
     analytics
   });
 });

@@ -14,6 +14,7 @@ export const createFault =
 
     res.status(201).json({
       success: true,
+      count: fault.length,
       fault
     });
   });
@@ -30,6 +31,7 @@ export const getFaults =
 
     res.json({
       success: true,
+      count: faults.length,
       faults
     });
   });
@@ -59,6 +61,7 @@ export const resolveFault =
 
     res.json({
       success: true,
+      count: fault.length,
       fault
     });
   });
