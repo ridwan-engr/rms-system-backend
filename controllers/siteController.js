@@ -2,70 +2,85 @@ import { Site } from "../models/Site.js";
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
+// Create Site
 export const createSite = asyncHandler(async (req, res) => {
 
-  try {
+  const site = await Site.create(req.body);
 
-    console.log(req.body);
-
-    const site = await Site.create(req.body);
-
-    res.status(201).json({
-      success: true,
-      site
-    });
-
-  } catch (error) {
-
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-      message: error.message
-    });
-
-  }
+  res.status(201).json({
+    success: true,
+    message: "Site created successfully",
+    site
+  });
 
 });
 
+// Get All Sites
+export const getSites = asyncHandler(async (req, res) => {
+
+  const sites = await Site.find()
+    .sort({ createdAt: -1 });
+
+  res.status(200).json({
+    success: true,
+    count: sites.length,
+    sites
+  });
+
+});
+
+// Get Single Site
 export const getSite = asyncHandler(async (req, res) => {
-  const site =
-    await Site.findById(req.params.id);
+
+  const site = await Site.findById(req.params.id);
 
   if (!site) {
     throw new ApiError(404, "Site not found");
   }
 
-  res.json({
+  res.status(200).json({
     success: true,
-    count: sites.length,
     site
   });
+
 });
 
+// Update Site
 export const updateSite = asyncHandler(async (req, res) => {
-  const site =
-    await Site.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
 
-  res.json({
-    success: true,
-    count: sites.length,
-    site
-  });
-});
-
-export const deleteSite = asyncHandler(async (req, res) => {
-  await Site.findByIdAndDelete(
-    req.params.id
+  const site = await Site.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+      runValidators: true
+    }
   );
 
-  res.json({
+  if (!site) {
+    throw new ApiError(404, "Site not found");
+  }
+
+  res.status(200).json({
     success: true,
-    count: sites.length,
-    message: "Site deleted"
+    message: "Site updated successfully",
+    site
   });
+
+});
+
+// Delete Site
+export const deleteSite = asyncHandler(async (req, res) => {
+
+  const site = await Site.findByIdAndDelete(req.params.id);
+
+  if (!site) {
+    throw new ApiError(404, "Site not found");
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Site deleted successfully"
+  });
+
 });
