@@ -4,7 +4,8 @@ import {
   createForecast,
   getForecasts,
   getForecast,
-    deleteForecast
+    deleteForecast,
+  updateForecast
 } from "../controllers/forecastController.js";
 
 import {
