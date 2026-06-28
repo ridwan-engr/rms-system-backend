@@ -1,3 +1,4 @@
+import { truncate } from "lodash";
 import mongoose from "mongoose";
 
 const gridSchema =
@@ -7,6 +8,11 @@ const gridSchema =
         type:
           mongoose.Schema.Types.ObjectId,
         ref: "Site",
+        required: true
+      },
+
+      feederName: {
+        type: String,
         required: true
       },
 
@@ -20,7 +26,7 @@ const gridSchema =
         default: 50
       },
 
-      powerAvailable: {
+      activePower: {
         type: Number,
         default: 0
       },
@@ -30,10 +36,33 @@ const gridSchema =
         default: false
       },
 
-      outageDurationMinutes: {
+      reactivePower: {
         type: Number,
         default: 0
-      }
+      },
+
+      apparentPower: {
+        type: Number,
+        default: 0
+      },
+
+      powerFactor: {
+        type: Number,
+        default: 0
+      },
+
+      availability: {
+        type: Boolean,
+        default: true
+      },
+
+      monthlyOutages:Number,
+      
+      SAIFI: Number,
+      SAIDI: Number,
+      ENS: Number,
+      LOLP: Number
+    
     },
     {
       timestamps: true

@@ -14,9 +14,10 @@ const siteSchema = new mongoose.Schema(
       trim: true
     },
 
-    state: {
-      type: String,
-      trim: true
+    status:{
+        type:String,
+        trim:true,
+        default:"Active"
     },
 
     latitude: {
@@ -30,7 +31,14 @@ const siteSchema = new mongoose.Schema(
     siteType: {
       type: String,
       default: true
+    },
+
+    commissioningDate: {
+      type: Date,
+      default: true
     }
+
+
   },
   {
     timestamps: true

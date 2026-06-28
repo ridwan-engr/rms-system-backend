@@ -10,55 +10,66 @@ const energyRecordSchema =
         required: true
       },
 
-      solarGenerationKWh: {
+      solarPower: {
         type: Number,
         default: 0
       },
 
-      batteryChargeKWh: {
+      batteryPower: {
         type: Number,
         default: 0
       },
 
-      batteryDischargeKWh: {
+      batteryMode: {
         type: Number,
         default: 0
       },
 
-      generatorGenerationKWh: {
+      generatorPower: {
         type: Number,
         default: 0
       },
 
-      gridImportKWh: {
+      gridPower: {
         type: Number,
         default: 0
       },
 
-      gridExportKWh: {
+      loadPower: {
         type: Number,
         default: 0
       },
 
-      loadDemandKWh: {
+      renewableContribution: {
         type: Number,
         default: 0
       },
 
-      criticalLoadKWh: {
+      dieselSaved: {
         type: Number,
         default: 0
       },
 
-      renewableFraction: {
+      co2Reduction: {
         type: Number,
         default: 0
       },
 
-      recordTime: {
-        type: Date,
-        default: Date.now
+      systemEfficiency: {
+        type: Number,
+        default: 0
+      },
+
+      totalGeneration: {
+        type: Number,
+        default: 0
+      },
+
+      totalConsumption: {
+        type: Number,
+        default: 0
       }
+
     },
     {
       timestamps: true

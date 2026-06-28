@@ -1,3 +1,4 @@
+import { isNumber } from "lodash";
 import mongoose from "mongoose";
 
 const forecastSchema =
@@ -10,47 +11,37 @@ const forecastSchema =
         required: true
       },
 
-      forecastType: {
-        type: String,
-        enum: [
-          "load",
-          "solar",
-          "wind"
-        ],
-        required: true
-      },
-
-      algorithm: {
-        type: String,
-        enum: [
-          "ANN",
-          "LSTM",
-          "RandomForest",
-          "XGBoost"
-        ]
-      },
-
-      forecastValue: {
-        type: Number,
-        required: true
-      },
-
-      actualValue: {
-        type: Number
-      },
-
-      rmse: Number,
-
-      mae: Number,
-
-      mape: Number,
-
-      rSquared: Number,
-
-      forecastTime: {
+      forecastDate: {
         type: Date,
         default: Date.now
-      }
+      },
+
+      weather: Number,
+
+      irradiance: Number,
+
+      ambientTemperature: Number,
+
+      pvForecast: Number,
+
+      loadForest: Number,
+
+      batterySOCForecast: Number,
+
+      batteryAutonomy: Number,
+
+      generatorRuntimeForecast: Number,
+
+      gridAvailabilityForecast: Number,
+
+      renewableContributionForecast: Number,
+
+      dieselForecast: Number,
+
+      co2Forecast: Number,
+
+      confidenceLevel: Number
+
     },
     {
       timestamps: true

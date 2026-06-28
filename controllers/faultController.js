@@ -1,10 +1,10 @@
 import { FaultLog }
-from "../models/FaultLog.js";
+  from "../models/FaultLog.js";
 import { ApiError }
-from "../utils/ApiError.js";
+  from "../utils/ApiError.js";
 
 import { asyncHandler }
-from "../utils/asyncHandler.js";
+  from "../utils/asyncHandler.js";
 
 export const createFault =
   asyncHandler(async (req, res) => {
@@ -24,10 +24,10 @@ export const getFaults =
 
     const faults =
       await FaultLog.find()
-      .populate("siteId")
-      .sort({
-        occurrenceTime: -1
-      });
+        .populate("siteId")
+        .sort({
+          occurrenceTime: -1
+        });
 
     res.json({
       success: true,
@@ -36,7 +36,7 @@ export const getFaults =
     });
   });
 
-export const resolveFault =
+export const getFault =
   asyncHandler(async (req, res) => {
 
     const fault =
@@ -46,9 +46,9 @@ export const resolveFault =
 
     if (!fault) {
       throw new ApiError(
-    404,
-    "Fault not found"
-      );  
+        404,
+        "Fault not found"
+      );
     }
 
     fault.status =
@@ -64,5 +64,52 @@ export const resolveFault =
       count: fault.length,
       fault
     });
+  });
+
+export const updateFaults = asyncHandler(async (req, res) => {
+
+  const fault = await FaultLog.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+      runValidators: true
+    }
+  );
+
+  if (!fault) {
+    throw new ApiError(404, "Fault not found");
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Fault updated successfully",
+    fault
+  });
+
+});
+
+export const deleteFault =
+  asyncHandler(async (req, res) => {
+
+    const fault =
+      await FaultLog.findByIdAndDelete(
+        req.params.id
+      );
+
+    if (!fault) {
+      throw new ApiError(
+        404,
+        "Fault not found"
+      );
+    }
+
+    res.status(200).json({
+      success: true,
+      count: fault.length,
+      message:
+        "Fault deleted successfully"
+    });
+
   });
 

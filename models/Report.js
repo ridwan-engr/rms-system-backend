@@ -22,7 +22,7 @@ const reportSchema =
         required: true
       },
 
-      energyGeneratedKWh: {
+      getExecutiveSummary: {
         type: Number,
         default: 0
       },

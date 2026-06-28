@@ -15,7 +15,30 @@ const batterySchema =
 
       chargingPowerKW: Number,
 
-      dischargingPowerKW: Number
+      dischargingPowerKW: Number,
+
+      batteryName: String,
+      
+      chemistry: String,
+    
+      voltage: Number,
+      
+      current: Number,
+      
+      stateOfCharge: Number,
+
+      stateOfHealth: String,
+      
+      chargeEfficiency: Number,
+      
+      dischargeEfficiency: Number,
+      
+      temperature: String,
+      
+      chargeCycles: Number,
+      
+      status: String
+
     },
     {
       timestamps: true

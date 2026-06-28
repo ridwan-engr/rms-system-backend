@@ -10,7 +10,7 @@ const faultLogSchema =
         required: true
       },
 
-      assetType: {
+      equipment: {
         type: String,
         enum: [
           "solar",
@@ -22,6 +22,11 @@ const faultLogSchema =
       },
 
       faultCode: {
+        type: String,
+        required: true
+      },
+
+      faultCategory: {
         type: String,
         required: true
       },
@@ -42,6 +47,16 @@ const faultLogSchema =
         default: "medium"
       },
 
+      rootCause: {
+        type: String,
+        required: true
+      },
+
+      technician: {
+        type: String,
+        required: true
+      },
+
       status: {
         type: String,
         enum: [
@@ -52,16 +67,26 @@ const faultLogSchema =
         default: "open"
       },
 
-      occurrenceTime: {
+      acknowledged: {
+        type: String,
+        required: true
+      },
+
+      downTime: {
         type: Date,
         default: Date.now
       },
 
-      resolvedTime: {
+      mttr: {
+        type: Number,
+        required: true
+      },
+
+      detectedAt: {
         type: Date
       },
 
-      recoveryTimeMinutes: {
+      resolvedAt: {
         type: Number,
         default: 0
       }
