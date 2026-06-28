@@ -2,6 +2,8 @@ import dns from "dns";
 
 import app from "./app.js";
 
+import http from "http";
+
 import { connectDatabase } from "./config/db.js";
 
 import { env } from "./config/env.js";
@@ -12,31 +14,38 @@ dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 async function startServer() {
 
-  try {
+    try {
 
-    await connectDatabase();
+        await connectDatabase();
 
-    app.listen(
-      env.port,
-      () => {
+        const server = http.createServer(app);
 
-        logger.success(
-          `HEMAP Server Running on http://localhost:${env.port}`
-        );
+        server.listen(PORT, () => {
 
-      }
-    );
+            console.log("");
 
-  } catch (error) {
+            console.log("===================================");
 
-    logger.error(
-      `Server Startup Failed: ${error.message}`
-    );
+            console.log("RMS Backend Started");
 
-    process.exit(1);
+            console.log(`Port : ${PORT}`);
 
-  }
+            console.log(`Environment : ${process.env.NODE_ENV}`);
+
+            console.log("===================================");
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        process.exit(1);
+
+    }
 
 }
 
-startServer();
+startServer()

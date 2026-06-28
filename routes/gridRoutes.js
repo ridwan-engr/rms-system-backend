@@ -6,7 +6,15 @@ import {
   getGridRecord,
   updateGridRecord,
   deleteGridRecord,
-  getGridStatus
+  getGridStatus,
+  getGridDashboard,
+  getLiveGrid,
+  getVoltageTrend,
+  getFrequencyTrend,
+  getImportExport,
+  getGridAvailability,
+  getGridOutages,
+  getGridSite
 } from "../controllers/gridController.js";
 
 import {
@@ -69,5 +77,21 @@ router.delete(
   requireAuth,
   deleteGridRecord
 );
+
+router.get("/", getGridDashboard);
+
+router.get("/live", getLiveGrid);
+
+router.get("/voltage", getVoltageTrend);
+
+router.get("/frequency", getFrequencyTrend);
+
+router.get("/import-export", getImportExport);
+
+router.get("/availability", getGridAvailability);
+
+router.get("/outages", getGridOutages);
+
+router.get("/site/:siteName", getGridSite);
 
 export default router;

@@ -2,6 +2,18 @@ import { Grid } from "../models/Grid.js";
 
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import {
+
+    gridDashboard,
+    liveGridStatus,
+    voltageTrend,
+    frequencyTrend,
+    importExportSummary,
+    gridAvailability,
+    outageSummary
+}
+
+from "../analytics/services/gridService.js";
 
 // Create Grid Record
 
@@ -155,3 +167,367 @@ export const getGridStatus =
     });
 
   });
+
+  /**
+ * ============================================================
+ * HEMAP
+ * Grid Controller
+ *
+ * Used By
+ *
+ * Grid.jsx
+ * Dashboard.jsx
+ * Monitoring.jsx
+ * Reports.jsx
+ *
+ * ============================================================
+ */
+
+
+
+/**
+ * ============================================================
+ * GET /api/grid
+ * ============================================================
+ */
+
+export async function getGridDashboard(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const dashboard =
+
+            await gridDashboard();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:dashboard
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/grid/live
+ * ============================================================
+ */
+
+export async function getLiveGrid(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const telemetry =
+
+            await liveGridStatus();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:telemetry
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/grid/voltage
+ * ============================================================
+ */
+
+export async function getVoltageTrend(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const trend =
+
+            await voltageTrend();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:trend
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/grid/frequency
+ * ============================================================
+ */
+
+export async function getFrequencyTrend(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const trend =
+
+            await frequencyTrend();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:trend
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/grid/import-export
+ * ============================================================
+ */
+
+export async function getImportExport(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const report =
+
+            await importExportSummary();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:report
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/grid/availability
+ * ============================================================
+ */
+
+export async function getGridAvailability(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const availability =
+
+            await gridAvailability();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:availability
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/grid/outages
+ * ============================================================
+ */
+
+export async function getGridOutages(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const outages =
+
+            await outageSummary();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:outages
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/grid/site/:siteName
+ * ============================================================
+ */
+
+export async function getGridSite(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const telemetry =
+
+            await liveGridStatus();
+
+        const site = telemetry.find(
+
+            item =>
+
+                item.site === req.params.siteName
+
+        );
+
+        if(!site){
+
+            return res.status(404).json({
+
+                success:false,
+
+                message:"Grid site not found."
+
+            });
+
+        }
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:site
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}

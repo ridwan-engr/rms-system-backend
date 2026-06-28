@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import compression from "compression";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 
@@ -14,6 +15,7 @@ import energyRoutes from "./routes/energyRoutes.js";
 import faultRoutes from "./routes/faultRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 import gridRoutes from "./routes/gridRoutes.js";
+
 //import analyticsRoutes from "./routes/analyticsRoutes.js";
 
 
@@ -21,6 +23,10 @@ import {
   notFoundHandler,
   errorHandler
 } from "./middleware/errorMiddleware.js";
+
+import routes from "./routes/index.js";
+
+import requestLogger from "./middlewares/requestLogger.js";
 
 const app = express();
 
@@ -61,6 +67,8 @@ app.use(
 */
 
 app.use(express.json());
+
+app.use(compression());
 
 app.use(
   express.urlencoded({
@@ -104,9 +112,9 @@ app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
     application:
-      "HEMAP",
+      "RMS System",
     description:
-      "Hybrid Energy Management and Analytics Platform",
+      "Remote Monitoring System",
     version: "1.0.0",
     status: "Running",
     timestamp:

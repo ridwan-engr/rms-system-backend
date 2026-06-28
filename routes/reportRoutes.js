@@ -5,7 +5,13 @@ import {
   getReports,
   getReport,
   updateReport,
-  deleteReport
+  deleteReport,
+  getOverallReport,
+  getEnergyReport,
+  getFuelReport,
+  getEmissionReport,
+  getReliabilityReport,
+  getExecutiveSummary
 } from "../controllers/reportController.js";
 
 import {
@@ -43,5 +49,17 @@ router.delete(
   requireAuth,
   deleteReport
 );
+
+router.get("/", getOverallReport);
+
+router.get("/energy", getEnergyReport);
+
+router.get("/fuel", getFuelReport);
+
+router.get("/emissions", getEmissionReport);
+
+router.get("/reliability", getReliabilityReport);
+
+router.get("/executive", getExecutiveSummary);
 
 export default router;

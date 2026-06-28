@@ -5,7 +5,12 @@ import {
   getSolarPlants,
   getSolarPlant,
   updateSolarPlant,
-  deleteSolarPlant
+  deleteSolarPlant,
+  getSolarDashboard,
+  getLiveSolar,
+  getSolarTrend,
+  getSolarRanking,
+  getSolarSite
 } from "../controllers/solarController.js";
 
 import {
@@ -43,4 +48,14 @@ router.delete(
   requireAuth,
   deleteSolarPlant
 );
+router.get("/", getSolarDashboard);
+
+router.get("/live", getLiveSolar);
+
+router.get("/trend", getSolarTrend);
+
+router.get("/ranking", getSolarRanking);
+
+router.get("/site/:siteName", getSolarSite);
+
 export default router;

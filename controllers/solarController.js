@@ -1,3 +1,29 @@
+/**
+ * ============================================================
+ * HEMAP
+ * Solar Controller
+ *
+ * Used By
+ *
+ * Solar.jsx
+ * Dashboard.jsx
+ * Monitoring.jsx
+ * Reports.jsx
+ *
+ * ============================================================
+ */
+
+import {
+
+    solarDashboard,
+    liveSolarStatus,
+    solarEnergyTrend,
+    solarRanking
+
+}
+
+from "../analytics/services/solarService.js";
+
 import { SolarPlant } from "../models/SolarPlant.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
@@ -82,3 +108,227 @@ export const deleteSolarPlant = asyncHandler(async (req, res) => {
 });
 
 
+
+/**
+ * ============================================================
+ * GET /api/solar
+ * ============================================================
+ */
+
+export async function getSolarDashboard(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const dashboard =
+
+            await solarDashboard();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:dashboard
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/solar/live
+ * ============================================================
+ */
+
+export async function getLiveSolar(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const telemetry =
+
+            await liveSolarStatus();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:telemetry
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/solar/trend
+ * ============================================================
+ */
+
+export async function getSolarTrend(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const trend =
+
+            await solarEnergyTrend();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:trend
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/solar/ranking
+ * ============================================================
+ */
+
+export async function getSolarRanking(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const ranking =
+
+            await solarRanking();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:ranking
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/solar/site/:siteName
+ * ============================================================
+ */
+
+export async function getSolarSite(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const telemetry =
+
+            await liveSolarStatus();
+
+        const site = telemetry.find(
+
+            item =>
+
+                item.site === req.params.siteName
+
+        );
+
+        if(!site){
+
+            return res.status(404).json({
+
+                success:false,
+
+                message:"Solar site not found."
+
+            });
+
+        }
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:site
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}

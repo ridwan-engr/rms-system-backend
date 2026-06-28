@@ -7,9 +7,54 @@ from "../models/Report.js";
 import { asyncHandler }
 from "../utils/asyncHandler.js";
 
-import { ens, recoveryTime,lolp, 
-reliabilityIndex, saifi, saidi, caidi, criticalLoadServed, resilienceIndex
- } from "../services/analyticsService.js";
+import {
+
+    dailyEnergyReport
+}
+
+from "../analytics/services/energyService.js";
+
+import {
+
+    solarDashboard
+}
+
+from "../analytics/services/solarService.js";
+
+import {
+
+    batteryDashboard
+
+}
+
+from "../analytics/services/batteryService.js";
+
+import {
+
+    generatorDashboard,
+    generatorFuelReport,
+    generatorEmissionReport
+
+}
+
+from "../analytics/services/generatorService.js";
+
+import {
+
+    gridDashboard
+
+}
+
+from "../analytics/services/gridService.js";
+
+import {
+
+    annualReliability
+
+}
+
+from "../analytics/services/reliabilityService.js";
+
 
 export const createReport =
   asyncHandler(async (req, res) => {
@@ -109,4 +154,348 @@ export const deleteReport = asyncHandler(async (req, res) => {
   });
 
 });
+
+
+/**
+ * ============================================================
+ * Overall Report
+ * ============================================================
+ */
+
+export async function getOverallReport(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const [
+
+            energy,
+
+            solar,
+
+            battery,
+
+            generator,
+
+            grid,
+
+            reliability
+
+        ] = await Promise.all([
+
+            dailyEnergyReport(),
+
+            solarDashboard(),
+
+            batteryDashboard(),
+
+            generatorDashboard(),
+
+            gridDashboard(),
+
+            annualReliability()
+
+        ]);
+
+        return res.status(200).json({
+
+            success:true,
+
+            generatedAt:new Date(),
+
+            data:{
+
+                energy,
+
+                solar,
+
+                battery,
+
+                generator,
+
+                grid,
+
+                reliability
+
+            }
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * Energy Report
+ * ============================================================
+ */
+
+export async function getEnergyReport(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const report =
+
+            await dailyEnergyReport();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:report
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * Fuel Report
+ * ============================================================
+ */
+
+export async function getFuelReport(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const dieselPrice =
+
+            Number(req.query.price || 1200);
+
+        const report =
+
+            await generatorFuelReport(
+
+                dieselPrice
+
+            );
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:report
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * Emission Report
+ * ============================================================
+ */
+
+export async function getEmissionReport(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const report =
+
+            await generatorEmissionReport();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:report
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * Reliability Report
+ * ============================================================
+ */
+
+export async function getReliabilityReport(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const report =
+
+            await annualReliability();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:report
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * Executive Summary
+ * ============================================================
+ */
+
+export async function getExecutiveSummary(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const [
+
+            solar,
+
+            battery,
+
+            generator,
+
+            grid,
+
+            reliability
+
+        ] = await Promise.all([
+
+            solarDashboard(),
+
+            batteryDashboard(),
+
+            generatorDashboard(),
+
+            gridDashboard(),
+
+            annualReliability()
+
+        ]);
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:{
+
+                renewableContribution:
+
+                    solar.performanceRatio,
+
+                batterySOC:
+
+                    battery.averageSOC,
+
+                generatorEfficiency:
+
+                    generator.averageEfficiency,
+
+                gridAvailability:
+
+                    grid.availability,
+
+                reliabilityIndex:
+
+                    reliability.saifi,
+
+                generatedAt:
+
+                    new Date()
+
+            }
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
   

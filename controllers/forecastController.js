@@ -1,6 +1,15 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import {Forecast} from "../models/Forecast.js";
 import {ApiError} from "../utils/ApiError.js";
+import {
+    solarForecast,
+    loadForecast,
+    batteryForecast,
+    generatorForecast,
+    forecastSummary
+}
+
+from "../analytics/services/forecastService.js";
 
 export const createForecast =
   asyncHandler(async (req, res) => {
@@ -98,3 +107,207 @@ export const getForecasts =
     });
 
     });
+
+/**
+ * ============================================================
+ * GET /api/forecast
+ * ============================================================
+ */
+
+export async function getForecastSummary(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const summary =
+
+            await forecastSummary();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:summary
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/forecast/solar
+ * ============================================================
+ */
+
+export async function getSolarForecast(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const forecast =
+
+            await solarForecast();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:forecast
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/forecast/load
+ * ============================================================
+ */
+
+export async function getLoadForecast(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const forecast =
+
+            await loadForecast();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:forecast
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/forecast/battery
+ * ============================================================
+ */
+
+export async function getBatteryForecast(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const forecast =
+
+            await batteryForecast();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:forecast
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
+
+
+/**
+ * ============================================================
+ * GET /api/forecast/generator
+ * ============================================================
+ */
+
+export async function getGeneratorForecast(
+
+    req,
+
+    res,
+
+    next
+
+){
+
+    try{
+
+        const forecast =
+
+            await generatorForecast();
+
+        return res.status(200).json({
+
+            success:true,
+
+            data:forecast
+
+        });
+
+    }
+
+    catch(error){
+
+        next(error);
+
+    }
+
+}
