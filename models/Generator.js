@@ -10,7 +10,7 @@ const generatorSchema =
       },
       generatorName:String,
 
-      capacityKW: Number,
+      capacityKVA: Number,
 
       fuelType: String,
 

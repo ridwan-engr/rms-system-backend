@@ -25,7 +25,7 @@ app.use(cors({
 
         "http://localhost:5173",
 
-        "https://hemap-frontend-46ki.onrender.com"
+        "https://rms-system-3cai.onrender.com/"
 
     ],
 
@@ -122,9 +122,9 @@ app.get("/", (req, res) => {
 
         success: true,
 
-        application: "HEMAP",
+        application: "RMS",
 
-        description: "Hybrid Energy Monitoring & Analytics Platform",
+        description: "REMOTE MONITORING SYSTEM",
 
         version: "1.0.0",
 
