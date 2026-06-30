@@ -15,6 +15,7 @@ export const createSite = asyncHandler(async (req, res) => {
 
 });
 
+
 // Get All Sites
 export const getSites = asyncHandler(async (req, res) => {
 
