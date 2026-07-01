@@ -10,6 +10,8 @@ export const createEnergyRecord =
     const record =
       await EnergyRecord.create(req.body);
 
+      req.io.emit("energy-created", record);
+
     res.status(201).json({
       success: true,
       count: record.length,

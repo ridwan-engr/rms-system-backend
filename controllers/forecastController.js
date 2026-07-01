@@ -33,6 +33,8 @@ export const createForecast =
     const forecast =
       await Forecast.create(req.body);
 
+      req.io.emit("forecast-created", forecast);
+
     res.status(201).json({
       success: true,
       count: forecast.length,

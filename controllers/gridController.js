@@ -23,6 +23,8 @@ export const createGridRecord =
     const grid =
       await Grid.create(req.body);
 
+      req.io.emit("grid-created", grid);
+
     res.status(201).json({
       success: true,
       count: grid.length,

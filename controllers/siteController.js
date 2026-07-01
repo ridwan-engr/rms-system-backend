@@ -7,6 +7,8 @@ export const createSite = asyncHandler(async (req, res) => {
 
   const site = await Site.create(req.body);
 
+  req.io.emit("site-created", site);
+
   res.status(201).json({
     success: true,
     message: "Site created successfully",

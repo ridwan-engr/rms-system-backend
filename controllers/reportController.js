@@ -62,6 +62,8 @@ export const createReport =
     const report =
       await Report.create(req.body);
 
+      req.io.emit("report-created", report);
+
     res.status(201).json({
       success: true,
       count: reports.length,

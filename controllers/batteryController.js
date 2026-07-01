@@ -35,6 +35,8 @@ export const createBattery =
     const battery =
       await Battery.create(req.body);
 
+      req.io.emit("battery-created", battery);
+
     res.status(201).json({
       success: true,
       count: battery.length,

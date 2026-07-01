@@ -37,8 +37,6 @@ router.use("/grid", gridRoutes);
 
 router.use("/reliability", reliabilityRoutes);
 
-router.use("/reports", reportRoutes);
-
 router.use("/forecast", forecastRoutes);
 
 router.use("/faults", faultRoutes);
