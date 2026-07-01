@@ -91,25 +91,25 @@ app.use(requestLogger);
  * ============================================================
  */
 
-app.use(rateLimit({
+//app.use(rateLimit({
 
-    windowMs: 15 * 60 * 1000,
+    //windowMs: 15 * 60 * 1000,
 
-    max: 500,
+    //max: 500,
 
-    standardHeaders: true,
+    //standardHeaders: true,
 
-    legacyHeaders: false,
+   // legacyHeaders: false,
 
-    message: {
+    //message: {
 
-        success: false,
+        // success: false,
 
-        message: "Too many requests. Please try again later."
+       // message: "Too many requests. Please try again later."
 
-    }
+   //}
 
-}));
+//}));
 
 /* ============================================================
  * Root Endpoint

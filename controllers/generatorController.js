@@ -20,7 +20,7 @@ export const createGenerator =
     const generator =
       await Generator.create(req.body);
 
-      req.io.emit("generator-created", generator);
+      //req.io.emit("generator-created", generator);
 
     res.status(201).json({
       success: true,

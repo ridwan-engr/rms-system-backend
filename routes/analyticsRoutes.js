@@ -1,6 +1,6 @@
 import { Router } from "express";
-
-import {
+import 
+    {
 
     getSolarAnalytics,
     getBatteryAnalytics,
@@ -10,21 +10,24 @@ import {
     getReliabilityAnalytics,
     getLiveTelemetry
 
-} from "../controllers/analyticsController.js";
-
-export const analytics = {
-    getSolarAnalytics,
-    getBatteryAnalytics,
-    getGeneratorAnalytics,
-    getGridAnalytics,
-    getEnergyAnalytics,
-    getReliabilityAnalytics,
-    getLiveTelemetry
-};
+} 
+from "../controllers/analyticsController.js";
 
 const router = Router();
 
-router.get("/analytics", getSolarAnalytics);
+/*
+|--------------------------------------------------------------------------
+| Dashboard Summary
+|--------------------------------------------------------------------------
+*/
+
+router.get("/", getSolarAnalytics);
+
+/*
+|--------------------------------------------------------------------------
+| Engineering Analytics
+|--------------------------------------------------------------------------
+*/
 
 router.get("/battery", getBatteryAnalytics);
 

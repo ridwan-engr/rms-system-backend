@@ -12,7 +12,7 @@ export const createFault =
     const fault =
       await FaultLog.create(req.body);
 
-      req.io.emit("fault-created", fault);
+      //req.io.emit("fault-created", fault);
 
     res.status(201).json({
       success: true,

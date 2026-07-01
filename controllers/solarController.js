@@ -33,7 +33,7 @@ export const createSolarPlant =
     const solar =
       await SolarPlant.create(req.body);
 
-      req.io.emit("solarplant-created", solar);
+     // req.io.emit("solarplant-created", solar);
 
     res.status(201).json({
       success: true,
