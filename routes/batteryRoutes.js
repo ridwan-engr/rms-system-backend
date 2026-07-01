@@ -4,6 +4,7 @@ import {
   createBattery,
   getBatteries,
   getBattery,
+  updateBattery,
   deleteBattery,
   getBatteryDashboard,
   getLiveBattery,
@@ -11,8 +12,7 @@ import {
   getBatteryHealth,
   getBatteryRuntime,
   getBatteryEfficiency,
-  getBatterySite,
-  updateBattery
+  getBatterySite
 } from "../controllers/batteryController.js";
 
 import {
@@ -21,48 +21,38 @@ import {
 
 const router = Router();
 
-router.get(
-  "/",
-  requireAuth,
-  getBatteries
-);
+/* ============================================================
+ * Analytics
+ * ============================================================
+ */
 
-router.post(
-  "/",
-  requireAuth,
-  createBattery
-);
+router.get("/dashboard", requireAuth, getBatteryDashboard);
 
-router.get(
-  "/:id",
-  requireAuth,
-  getBattery
-);
+router.get("/live", requireAuth, getLiveBattery);
 
-router.patch(
-  "/:id",
-  requireAuth,
-  updateBattery
-);
+router.get("/trend", requireAuth, getBatteryTrend);
 
-router.delete(
-  "/:id",
-  requireAuth,
-  deleteBattery
-);
+router.get("/health", requireAuth, getBatteryHealth);
 
-router.get("/", getBatteryDashboard);
+router.get("/runtime", requireAuth, getBatteryRuntime);
 
-router.get("/live", getLiveBattery);
+router.get("/efficiency", requireAuth, getBatteryEfficiency);
 
-router.get("/trend", getBatteryTrend);
+router.get("/site/:siteName", requireAuth, getBatterySite);
 
-router.get("/health", getBatteryHealth);
+/* ============================================================
+ * CRUD
+ * ============================================================
+ */
 
-router.get("/runtime", getBatteryRuntime);
+router.get("/", requireAuth, getBatteries);
 
-router.get("/efficiency", getBatteryEfficiency);
+router.get("/:id", requireAuth, getBattery);
 
-router.get("/site/:siteName", getBatterySite);
+router.post("/", requireAuth, createBattery);
+
+router.patch("/:id", requireAuth, updateBattery);
+
+router.delete("/:id", requireAuth, deleteBattery);
 
 export default router;

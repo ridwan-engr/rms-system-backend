@@ -93,21 +93,19 @@ export async function getMonitoringOverview(
 
             success:true,
 
-            data:{
+            timestamp:new Date(),
 
-                timestamp:new Date(),
+            energy,
 
-                energy,
+            solar,
 
-                solar,
+            battery,
 
-                battery,
+            generator,
 
-                generator,
+            grid
 
-                grid
-
-            }
+            
 
         });
 

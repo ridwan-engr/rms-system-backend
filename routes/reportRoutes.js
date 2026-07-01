@@ -14,52 +14,40 @@ import {
   getExecutiveSummary
 } from "../controllers/reportController.js";
 
-import {
-  requireAuth
-} from "../middlewares/authMiddleware.js";
+import { requireAuth } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.get(
-  "/",
-  requireAuth,
-  getReports
-);
+/* ============================================================
+ * Report Analytics
+ * ============================================================
+ */
 
-router.get(
-  "/:id",
-  requireAuth,
-  getReport
-);
+router.get("/overall", requireAuth, getOverallReport);
 
-router.post(
-  "/",
-  requireAuth,
-  createReport
-);
+router.get("/energy", requireAuth, getEnergyReport);
 
-router.patch(
-  "/:id",
-  requireAuth,
-  updateReport
-);
+router.get("/fuel", requireAuth, getFuelReport);
 
-router.delete(
-  "/:id",
-  requireAuth,
-  deleteReport
-);
+router.get("/emissions", requireAuth, getEmissionReport);
 
-router.get("/", getOverallReport);
+router.get("/reliability", requireAuth, getReliabilityReport);
 
-router.get("/energy", getEnergyReport);
+router.get("/executive", requireAuth, getExecutiveSummary);
 
-router.get("/fuel", getFuelReport);
+/* ============================================================
+ * CRUD
+ * ============================================================
+ */
 
-router.get("/emissions", getEmissionReport);
+router.get("/", requireAuth, getReports);
 
-router.get("/reliability", getReliabilityReport);
+router.get("/:id", requireAuth, getReport);
 
-router.get("/executive", getExecutiveSummary);
+router.post("/", requireAuth, createReport);
+
+router.patch("/:id", requireAuth, updateReport);
+
+router.delete("/:id", requireAuth, deleteReport);
 
 export default router;

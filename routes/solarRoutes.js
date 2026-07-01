@@ -1,61 +1,71 @@
 import { Router } from "express";
 
 import {
-  createSolarPlant,
-  getSolarPlants,
-  getSolarPlant,
-  updateSolarPlant,
-  deleteSolarPlant,
-  getSolarDashboard,
-  getLiveSolar,
-  getSolarTrend,
-  getSolarRanking,
-  getSolarSite
-} from "../controllers/solarController.js";
+
+    createSolarPlant,
+
+    getSolarPlants,
+
+    getSolarPlant,
+
+    updateSolarPlant,
+
+    deleteSolarPlant,
+
+    getSolarDashboard,
+
+    getLiveSolar,
+
+    getSolarTrend,
+
+    getSolarRanking,
+
+    getSolarSite
+
+}
+
+from "../controllers/solarController.js";
 
 import {
-  requireAuth
-} from "../middlewares/authMiddleware.js";
+
+    requireAuth
+
+}
+
+from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.get(
-  "/",
-  requireAuth,
-  getSolarPlants
-);
+/*
+|--------------------------------------------------------------------------
+| Analytics
+|--------------------------------------------------------------------------
+*/
 
-router.get(
-  "/:id",
-  requireAuth,
-  getSolarPlant
-);
+router.get("/dashboard", requireAuth, getSolarDashboard);
 
-router.post(
-  "/",
-  requireAuth,
-  createSolarPlant
-);
+router.get("/live", requireAuth, getLiveSolar);
 
-router.patch(
-  "/:id",
-  requireAuth,
-  updateSolarPlant
-);
+router.get("/trend", requireAuth, getSolarTrend);
 
-router.delete(
-  "/:id",
-  requireAuth,
-  deleteSolarPlant
-);
-router.get("/", getSolarDashboard);
+router.get("/ranking", requireAuth, getSolarRanking);
 
-router.get("/live", getLiveSolar);
+router.get("/site/:siteName", requireAuth, getSolarSite);
 
-router.get("/trend", getSolarTrend);
+/*
+|--------------------------------------------------------------------------
+| CRUD
+|--------------------------------------------------------------------------
+*/
 
-router.get("/ranking", getSolarRanking);
+router.get("/", requireAuth, getSolarPlants);
 
-router.get("/site/:siteName", getSolarSite);
+router.get("/:id", requireAuth, getSolarPlant);
+
+router.post("/", requireAuth, createSolarPlant);
+
+router.patch("/:id", requireAuth, updateSolarPlant);
+
+router.delete("/:id", requireAuth, deleteSolarPlant);
 
 export default router;

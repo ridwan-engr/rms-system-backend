@@ -106,7 +106,8 @@ export const deleteBattery = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     success: true,
-    message: "Battery deleted successfully"
+    message: "Battery deleted successfully",
+    battery
   });
 
 });
@@ -139,7 +140,7 @@ export async function getBatteryDashboard(
 
             success:true,
 
-            data:dashboard
+            dashboard
 
         });
 
@@ -180,7 +181,7 @@ export async function getLiveBattery(
 
             success:true,
 
-            data:telemetry
+            telemetry
 
         });
 
@@ -221,7 +222,7 @@ export async function getBatteryTrend(
 
             success:true,
 
-            data:trend
+            trend
 
         });
 
@@ -262,7 +263,7 @@ export async function getBatteryHealth(
 
             success:true,
 
-            data:health
+            health
 
         });
 
@@ -303,7 +304,7 @@ export async function getBatteryRuntime(
 
             success:true,
 
-            data:runtime
+            runtime
 
         });
 
@@ -344,7 +345,7 @@ export async function getBatteryEfficiency(
 
             success:true,
 
-            data:efficiency
+            efficiency
 
         });
 
@@ -405,7 +406,7 @@ export async function getBatterySite(
 
             success:true,
 
-            data:site
+            site
 
         });
 

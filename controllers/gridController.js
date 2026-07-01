@@ -213,7 +213,7 @@ export async function getGridDashboard(
 
             success:true,
 
-            data:dashboard
+            dashboard
 
         });
 
@@ -254,7 +254,7 @@ export async function getLiveGrid(
 
             success:true,
 
-            data:telemetry
+            telemetry
 
         });
 
@@ -295,7 +295,7 @@ export async function getVoltageTrend(
 
             success:true,
 
-            data:trend
+            trend
 
         });
 
@@ -336,7 +336,7 @@ export async function getFrequencyTrend(
 
             success:true,
 
-            data:trend
+            trend
 
         });
 
@@ -377,7 +377,7 @@ export async function getImportExport(
 
             success:true,
 
-            data:report
+            report
 
         });
 
@@ -418,7 +418,7 @@ export async function getGridAvailability(
 
             success:true,
 
-            data:availability
+            availability
 
         });
 
@@ -459,7 +459,7 @@ export async function getGridOutages(
 
             success:true,
 
-            data:outages
+            outages
 
         });
 
@@ -520,7 +520,7 @@ export async function getGridSite(
 
             success:true,
 
-            data:site
+            site
 
         });
 

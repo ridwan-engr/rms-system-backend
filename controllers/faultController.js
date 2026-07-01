@@ -68,7 +68,7 @@ export const getFault =
     });
   });
 
-export const updateFaults = asyncHandler(async (req, res) => {
+export const updateFault = asyncHandler(async (req, res) => {
 
   const fault = await FaultLog.findByIdAndUpdate(
     req.params.id,

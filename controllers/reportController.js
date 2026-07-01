@@ -1,25 +1,25 @@
 import { FaultLog }
-from "../models/FaultLog.js";
+    from "../models/FaultLog.js";
 
 import { Report }
-from "../models/Report.js";
+    from "../models/Report.js";
 
 import { asyncHandler }
-from "../utils/asyncHandler.js";
+    from "../utils/asyncHandler.js";
 
 import {
 
     dailyEnergyReport
 }
 
-from "../analytics/services/energyService.js";
+    from "../analytics/services/energyService.js";
 
 import {
 
     solarDashboard
 }
 
-from "../analytics/services/solarService.js";
+    from "../analytics/services/solarService.js";
 
 import {
 
@@ -27,7 +27,7 @@ import {
 
 }
 
-from "../analytics/services/batteryService.js";
+    from "../analytics/services/batteryService.js";
 
 import {
 
@@ -37,7 +37,7 @@ import {
 
 }
 
-from "../analytics/services/generatorService.js";
+    from "../analytics/services/generatorService.js";
 
 import {
 
@@ -45,7 +45,7 @@ import {
 
 }
 
-from "../analytics/services/gridService.js";
+    from "../analytics/services/gridService.js";
 
 import {
 
@@ -53,107 +53,107 @@ import {
 
 }
 
-from "../analytics/services/reliabilityService.js";
+    from "../analytics/services/reliabilityService.js";
 
 
 export const createReport =
-  asyncHandler(async (req, res) => {
+    asyncHandler(async (req, res) => {
 
-    const report =
-      await Report.create(req.body);
+        const report =
+            await Report.create(req.body);
 
-      req.io.emit("report-created", report);
+        req.io.emit("report-created", report);
 
-    res.status(201).json({
-      success: true,
-      count: reports.length,
-      report
+        res.status(201).json({
+            success: true,
+            count: reports.length,
+            report
+        });
     });
-  });
 
 export const getReports =
-  asyncHandler(async (req, res) => {
+    asyncHandler(async (req, res) => {
 
-    const reports =
-      await Report.find()
-      .populate("siteId")
-      .sort({
-        occurrenceTime: -1
-      });
+        const reports =
+            await Report.find()
+                .populate("siteId")
+                .sort({
+                    occurrenceTime: -1
+                });
 
-    res.json({
-      success: true,
-      count: reports.length,
-      reports
+        res.json({
+            success: true,
+            count: reports.length,
+            reports
+        });
     });
-  });
 
 export const getReport =
-  asyncHandler(async (req, res) => {
+    asyncHandler(async (req, res) => {
 
-    const report =
-      await Report.findById(
-        req.params.id
-      );
+        const report =
+            await Report.findById(
+                req.params.id
+            );
 
-      if (!report) {
-  throw new ApiError(
-    404,
-    "Report not found"
-  );
-}
+        if (!report) {
+            throw new ApiError(
+                404,
+                "Report not found"
+            );
+        }
 
-    report.status =
-      "resolved";
+        report.status =
+            "resolved";
 
-    report.resolvedTime =
-      new Date();
+        report.resolvedTime =
+            new Date();
 
-    await report.save();
+        await report.save();
 
-    res.json({
-      success: true,
-      count: reports.length,
-      report
+        res.json({
+            success: true,
+            count: reports.length,
+            report
+        });
     });
-  });
 
 export const updateReport = asyncHandler(async (req, res) => {
 
-  const report = await Report.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    {
-      new: true,
-      runValidators: true
+    const report = await Report.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+            new: true,
+            runValidators: true
+        }
+    );
+
+    if (!report) {
+        throw new ApiError(404, "Report not found");
     }
-  );
 
-  if (!report) {
-    throw new ApiError(404, "Report not found");
-  }
-
-  res.status(200).json({
-    success: true,
-    message: "Report updated successfully",
-    report
-  });
+    res.status(200).json({
+        success: true,
+        message: "Report updated successfully",
+        report
+    });
 
 });
 
 // Delete Site
 export const deleteReport = asyncHandler(async (req, res) => {
 
-  const report = await Report.findByIdAndDelete(req.params.id);
+    const report = await Report.findByIdAndDelete(req.params.id);
 
-  if (!report) {
-    throw new ApiError(404, "Report not found");
-  }
+    if (!report) {
+        throw new ApiError(404, "Report not found");
+    }
 
-  res.status(200).json({
-    success: true,
-    message: "Report deleted successfully"
-  });
+    res.status(200).json({
+        success: true,
+        message: "Report deleted successfully"
+    });
 
 });
 
@@ -172,9 +172,9 @@ export async function getOverallReport(
 
     next
 
-){
+) {
 
-    try{
+    try {
 
         const [
 
@@ -208,31 +208,27 @@ export async function getOverallReport(
 
         return res.status(200).json({
 
-            success:true,
+            success: true,
 
-            generatedAt:new Date(),
+            generatedAt: new Date(),
 
-            data:{
+            energy,
 
-                energy,
+            solar,
 
-                solar,
+            battery,
 
-                battery,
+            generator,
 
-                generator,
+            grid,
 
-                grid,
-
-                reliability
-
-            }
+            reliability
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         next(error);
 
@@ -255,9 +251,9 @@ export async function getEnergyReport(
 
     next
 
-){
+) {
 
-    try{
+    try {
 
         const report =
 
@@ -265,15 +261,15 @@ export async function getEnergyReport(
 
         return res.status(200).json({
 
-            success:true,
+            success: true,
 
-            data:report
+            report
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         next(error);
 
@@ -296,9 +292,9 @@ export async function getFuelReport(
 
     next
 
-){
+) {
 
-    try{
+    try {
 
         const dieselPrice =
 
@@ -314,15 +310,15 @@ export async function getFuelReport(
 
         return res.status(200).json({
 
-            success:true,
+            success: true,
 
-            data:report
+            report
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         next(error);
 
@@ -345,9 +341,9 @@ export async function getEmissionReport(
 
     next
 
-){
+) {
 
-    try{
+    try {
 
         const report =
 
@@ -355,15 +351,15 @@ export async function getEmissionReport(
 
         return res.status(200).json({
 
-            success:true,
+            success: true,
 
-            data:report
+            report
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         next(error);
 
@@ -386,9 +382,9 @@ export async function getReliabilityReport(
 
     next
 
-){
+) {
 
-    try{
+    try {
 
         const report =
 
@@ -396,15 +392,15 @@ export async function getReliabilityReport(
 
         return res.status(200).json({
 
-            success:true,
+            success: true,
 
-            data:report
+            report
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         next(error);
 
@@ -427,9 +423,9 @@ export async function getExecutiveSummary(
 
     next
 
-){
+) {
 
-    try{
+    try {
 
         const [
 
@@ -459,45 +455,42 @@ export async function getExecutiveSummary(
 
         return res.status(200).json({
 
-            success:true,
+            success: true,
 
-            data:{
+            renewableContribution:
 
-                renewableContribution:
+                solar.performanceRatio,
 
-                    solar.performanceRatio,
+            batterySOC:
 
-                batterySOC:
+                battery.averageSOC,
 
-                    battery.averageSOC,
+            generatorEfficiency:
 
-                generatorEfficiency:
+                generator.averageEfficiency,
 
-                    generator.averageEfficiency,
+            gridAvailability:
 
-                gridAvailability:
+                grid.availability,
 
-                    grid.availability,
+            reliabilityIndex:
 
-                reliabilityIndex:
+                reliability.saifi,
 
-                    reliability.saifi,
+            generatedAt:
 
-                generatedAt:
+                new Date()
 
-                    new Date()
 
-            }
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         next(error);
 
     }
 
 }
-  

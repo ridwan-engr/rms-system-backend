@@ -12,9 +12,19 @@ import {
 
 } from "../controllers/analyticsController.js";
 
+export const analytics = {
+    getSolarAnalytics,
+    getBatteryAnalytics,
+    getGeneratorAnalytics,
+    getGridAnalytics,
+    getEnergyAnalytics,
+    getReliabilityAnalytics,
+    getLiveTelemetry
+};
+
 const router = Router();
 
-router.get("/solar", getSolarAnalytics);
+router.get("/analytics", getSolarAnalytics);
 
 router.get("/battery", getBatteryAnalytics);
 

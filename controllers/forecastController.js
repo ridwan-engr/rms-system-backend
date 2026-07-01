@@ -152,7 +152,7 @@ export async function getForecastSummary(
 
             success:true,
 
-            data:summary
+            summary
 
         });
 
@@ -193,7 +193,7 @@ export async function getSolarForecast(
 
             success:true,
 
-            data:forecast
+            forecast
 
         });
 
@@ -234,7 +234,7 @@ export async function getLoadForecast(
 
             success:true,
 
-            data:forecast
+            forecast
 
         });
 
@@ -275,7 +275,7 @@ export async function getBatteryForecast(
 
             success:true,
 
-            data:forecast
+            forecast
 
         });
 
@@ -316,7 +316,7 @@ export async function getGeneratorForecast(
 
             success:true,
 
-            data:forecast
+            forecast
 
         });
 

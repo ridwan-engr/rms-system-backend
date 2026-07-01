@@ -600,19 +600,17 @@ export async function getLiveTelemetry(req,res,next){
 
             success:true,
 
-            data:{
+            solar,
 
-                solar,
+            battery,
 
-                battery,
+            generator,
 
-                generator,
-
-                grid
+            grid
 
             }
 
-        });
+        );
 
     }
 

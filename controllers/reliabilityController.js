@@ -23,7 +23,7 @@ import {
 
 }
 
-from "../analytics/services/reliabilityService.js";
+    from "../analytics/services/reliabilityService.js";
 
 
 /**
@@ -40,9 +40,9 @@ export async function getReliabilityDashboard(
 
     next
 
-){
+) {
 
-    try{
+    try {
 
         const dashboard =
 
@@ -50,15 +50,15 @@ export async function getReliabilityDashboard(
 
         return res.status(200).json({
 
-            success:true,
+            success: true,
 
-            data:dashboard
+            dashboard
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         next(error);
 
@@ -81,9 +81,9 @@ export async function getAnnualReliability(
 
     next
 
-){
+) {
 
-    try{
+    try {
 
         const report =
 
@@ -91,15 +91,15 @@ export async function getAnnualReliability(
 
         return res.status(200).json({
 
-            success:true,
+            success: true,
 
-            data:report
+            report
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         next(error);
 
@@ -122,9 +122,9 @@ export async function getMonthlyReliability(
 
     next
 
-){
+) {
 
-    try{
+    try {
 
         const report =
 
@@ -132,15 +132,15 @@ export async function getMonthlyReliability(
 
         return res.status(200).json({
 
-            success:true,
+            success: true,
 
-            data:report
+            report
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         next(error);
 
@@ -163,9 +163,9 @@ export async function getReliabilityTrend(
 
     next
 
-){
+) {
 
-    try{
+    try {
 
         const trend =
 
@@ -173,15 +173,15 @@ export async function getReliabilityTrend(
 
         return res.status(200).json({
 
-            success:true,
+            success: true,
 
-            data:trend
+            trend
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         next(error);
 
@@ -204,9 +204,9 @@ export async function getReliabilityAlarm(
 
     next
 
-){
+) {
 
-    try{
+    try {
 
         const alarm =
 
@@ -214,73 +214,71 @@ export async function getReliabilityAlarm(
 
         return res.status(200).json({
 
-            success:true,
+            success: true,
 
-            data:alarm
+            alarm
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         next(error);
 
     }
 
-}
 
+    /**
+     * ============================================================
+     * GET /api/reliability/kpi
+     * ============================================================
+     */
 
-/**
- * ============================================================
- * GET /api/reliability/kpi
- * ============================================================
- */
+    export async function getReliabilityKPI(
 
-export async function getReliabilityKPI(
+        req,
 
-    req,
+        res,
 
-    res,
+        next
 
-    next
+    ) {
 
-){
+        try {
 
-    try{
+            const {
 
-        const {
+                monthlySAIFI = [],
 
-            monthlySAIFI=[],
+                monthlySAIDI = []
 
-            monthlySAIDI=[]
+            } = req.body;
 
-        } = req.body;
+            const kpi =
 
-        const kpi =
+                reliabilityKPI({
 
-            reliabilityKPI({
+                    monthlySAIFI,
 
-                monthlySAIFI,
+                    monthlySAIDI
 
-                monthlySAIDI
+                });
+
+            return res.status(200).json({
+
+                success: true,
+
+                kpi
 
             });
 
-        return res.status(200).json({
+        }
 
-            success:true,
+        catch (error) {
 
-            data:kpi
+            next(error);
 
-        });
-
-    }
-
-    catch(error){
-
-        next(error);
+        }
 
     }
-
-}

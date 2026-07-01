@@ -118,7 +118,7 @@ export async function getGeneratorDashboard(
 
             success:true,
 
-            data:dashboard
+            dashboard
 
         });
 
@@ -159,7 +159,7 @@ export async function getLiveGenerator(
 
             success:true,
 
-            data:telemetry
+            telemetry
 
         });
 
@@ -208,7 +208,7 @@ export async function getGeneratorFuel(
 
             success:true,
 
-            data:report
+            report
 
         });
 
@@ -249,7 +249,7 @@ export async function getGeneratorHealth(
 
             success:true,
 
-            data:health
+            health
 
         });
 
@@ -290,7 +290,7 @@ export async function getGeneratorRuntime(
 
             success:true,
 
-            data:runtime
+            runtime
 
         });
 
@@ -331,7 +331,7 @@ export async function getMaintenanceReport(
 
             success:true,
 
-            data:report
+            report
 
         });
 
@@ -372,7 +372,7 @@ export async function getGeneratorEmissions(
 
             success:true,
 
-            data:emissions
+            emissions
 
         });
 
@@ -433,7 +433,7 @@ export async function getGeneratorSite(
 
             success:true,
 
-            data:site
+            site
 
         });
 

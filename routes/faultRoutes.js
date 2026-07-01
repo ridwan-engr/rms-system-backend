@@ -4,7 +4,7 @@ import {
   createFault,
   getFaults,
   getFault,
-  updateFaults,
+  updateFault,
   deleteFault
 } from "../controllers/faultController.js";
 
@@ -29,7 +29,7 @@ router.post(
 router.patch(
   "/resolve/:id",
   requireAuth,
-  updateFaults
+  updateFault
 );
 
 router.get(

@@ -66,7 +66,7 @@ export async function getDashboard(
 
             success:true,
 
-            data:dashboard
+            dashboard
 
         });
 
@@ -108,7 +108,7 @@ export async function getEnergyDashboard(
 
             success:true,
 
-            data:energy
+            energy
 
         });
 
@@ -150,7 +150,7 @@ export async function getDashboardKPI(
 
             success:true,
 
-            data:kpi
+            kpi
 
         });
 
@@ -192,7 +192,7 @@ export async function getFleetSummary(
 
             success:true,
 
-            data:summary
+            summary
 
         });
 
@@ -234,7 +234,7 @@ export async function getAlarmSummary(
 
             success:true,
 
-            data:alarms
+            alarms
 
         });
 
@@ -276,7 +276,7 @@ export async function getDigitalTwin(
 
             success:true,
 
-            data:twin
+            twin
 
         });
 

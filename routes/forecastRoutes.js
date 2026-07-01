@@ -4,40 +4,47 @@ import {
   createForecast,
   getForecasts,
   getForecast,
-  deleteForecast,
   updateForecast,
+  deleteForecast,
   getForecastSummary,
   getSolarForecast,
   getLoadForecast,
   getBatteryForecast,
   getGeneratorForecast
-
 } from "../controllers/forecastController.js";
 
-import {
-  requireAuth
-} from "../middlewares/authMiddleware.js";
+import { requireAuth } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.post("/", requireAuth, createForecast);
+/* ============================================================
+ * Forecast Analytics
+ * ============================================================
+ */
+
+router.get("/summary", requireAuth, getForecastSummary);
+
+router.get("/solar", requireAuth, getSolarForecast);
+
+router.get("/load", requireAuth, getLoadForecast);
+
+router.get("/battery", requireAuth, getBatteryForecast);
+
+router.get("/generator", requireAuth, getGeneratorForecast);
+
+/* ============================================================
+ * CRUD
+ * ============================================================
+ */
+
+router.get("/", requireAuth, getForecasts);
 
 router.get("/:id", requireAuth, getForecast);
 
-router.get("/", requireAuth, getForecasts);
+router.post("/", requireAuth, createForecast);
 
 router.patch("/:id", requireAuth, updateForecast);
 
 router.delete("/:id", requireAuth, deleteForecast);
-
-router.get("/", getForecastSummary);
-
-router.get("/solar", getSolarForecast);
-
-router.get("/load", getLoadForecast);
-
-router.get("/battery", getBatteryForecast);
-
-router.get("/generator", getGeneratorForecast);
 
 export default router;

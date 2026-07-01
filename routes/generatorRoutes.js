@@ -16,56 +16,44 @@ import {
   getGeneratorSite
 } from "../controllers/generatorController.js";
 
-import {
-  requireAuth
-} from "../middlewares/authMiddleware.js";
+import { requireAuth } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.get(
-  "/",
-  requireAuth,
-  getGenerators
-);
+/* ============================================================
+ * Analytics
+ * ============================================================
+ */
 
-router.post(
-  "/",
-  requireAuth,
-  createGenerator
-);
+router.get("/dashboard", requireAuth, getGeneratorDashboard);
 
-router.get(
-  "/:id",
-  requireAuth,
-  getGenerator
-);
+router.get("/live", requireAuth, getLiveGenerator);
 
-router.patch(
-  "/:id",
-  requireAuth,
-  updateGenerator
-);
+router.get("/fuel", requireAuth, getGeneratorFuel);
 
-router.delete(
-  "/:id",
-  requireAuth,
-  deleteGenerator
-);
+router.get("/health", requireAuth, getGeneratorHealth);
 
-/*router.get("/", getGeneratorDashboard);
+router.get("/runtime", requireAuth, getGeneratorRuntime);
 
-router.get("/live", getLiveGenerator);
+router.get("/maintenance", requireAuth, getMaintenanceReport);
 
-router.get("/fuel", getGeneratorFuel);
+router.get("/emissions", requireAuth, getGeneratorEmissions);
 
-router.get("/health", getGeneratorHealth);
+router.get("/site/:siteName", requireAuth, getGeneratorSite);
 
-router.get("/runtime", getGeneratorRuntime);
+/* ============================================================
+ * CRUD
+ * ============================================================
+ */
 
-router.get("/maintenance", getMaintenanceReport);
+router.get("/", requireAuth, getGenerators);
 
-router.get("/emissions", getGeneratorEmissions);
+router.get("/:id", requireAuth, getGenerator);
 
-router.get("/site/:siteName", getGeneratorSite); */
+router.post("/", requireAuth, createGenerator);
+
+router.patch("/:id", requireAuth, updateGenerator);
+
+router.delete("/:id", requireAuth, deleteGenerator);
 
 export default router;

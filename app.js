@@ -25,7 +25,7 @@ app.use(cors({
 
         "http://localhost:5173",
 
-        "https://rms-system-3cai.onrender.com/"
+        "https://rms-system-3cai.onrender.com"
 
     ],
 

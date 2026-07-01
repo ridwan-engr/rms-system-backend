@@ -21,77 +21,44 @@ import {
   requireAuth
 } from "../middlewares/authMiddleware.js";
 
-import {
-  requireFields
-} from "../middlewares/validateRequest.js";
-
 const router = Router();
 
-//Get Grid Summary
+/* ============================================================
+ * Analytics
+ * ============================================================
+ */
 
-router.get(
-  "/status",
-  requireAuth,
-  getGridStatus
-);
+router.get("/dashboard", requireAuth, getGridDashboard);
 
+router.get("/status", requireAuth, getGridStatus);
 
-//Get All Records
+router.get("/live", requireAuth, getLiveGrid);
 
+router.get("/voltage", requireAuth, getVoltageTrend);
 
-router.get(
-  "/",
-  requireAuth,
-  getGridRecords
-);
+router.get("/frequency", requireAuth, getFrequencyTrend);
 
+router.get("/import-export", requireAuth, getImportExport);
 
-//Get Single Record
+router.get("/availability", requireAuth, getGridAvailability);
 
-router.get(
-  "/:id",
-  requireAuth,
-  getGridRecord
-);
+router.get("/outages", requireAuth, getGridOutages);
 
-//Create Record
+router.get("/site/:siteName", requireAuth, getGridSite);
 
-router.post(
-  "/",
-  requireAuth,
-  createGridRecord
-);
+/* ============================================================
+ * CRUD
+ * ============================================================
+ */
 
-//Update Record
+router.get("/", requireAuth, getGridRecords);
 
-router.patch(
-  "/:id",
-  requireAuth,
-  updateGridRecord
-);
+router.get("/:id", requireAuth, getGridRecord);
 
-//Delete Record
+router.post("/", requireAuth, createGridRecord);
 
-router.delete(
-  "/:id",
-  requireAuth,
-  deleteGridRecord
-);
+router.patch("/:id", requireAuth, updateGridRecord);
 
-router.get("/", getGridDashboard);
-
-router.get("/live", getLiveGrid);
-
-router.get("/voltage", getVoltageTrend);
-
-router.get("/frequency", getFrequencyTrend);
-
-router.get("/import-export", getImportExport);
-
-router.get("/availability", getGridAvailability);
-
-router.get("/outages", getGridOutages);
-
-router.get("/site/:siteName", getGridSite);
+router.delete("/:id", requireAuth, deleteGridRecord);
 
 export default router;

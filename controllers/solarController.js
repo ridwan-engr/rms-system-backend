@@ -137,7 +137,7 @@ export async function getSolarDashboard(
 
             success:true,
 
-            data:dashboard
+            dashboard
 
         });
 
@@ -178,7 +178,7 @@ export async function getLiveSolar(
 
             success:true,
 
-            data:telemetry
+            telemetry
 
         });
 
@@ -219,7 +219,7 @@ export async function getSolarTrend(
 
             success:true,
 
-            data:trend
+            trend
 
         });
 
@@ -260,7 +260,7 @@ export async function getSolarRanking(
 
             success:true,
 
-            data:ranking
+            ranking
 
         });
 
@@ -321,7 +321,7 @@ export async function getSolarSite(
 
             success:true,
 
-            data:site
+            site
 
         });
 
