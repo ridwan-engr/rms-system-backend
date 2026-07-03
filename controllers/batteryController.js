@@ -14,6 +14,7 @@
  */
 
 import  Battery  from "../models/Battery.js";
+import { Socket } from "socket.io";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import {
 
