@@ -5,20 +5,30 @@ export async function connectDatabase() {
 
   try {
 
-    await mongoose.connect(
-      env.mongodbUri
-    );
+    await mongoose.connect(env.mongodbUri, {
 
-    console.log(
-      "MongoDB Connected Successfully"
-    );
+      serverSelectionTimeoutMS: 10000,
+
+      socketTimeoutMS: 45000
+
+    });
+
+    mongoose.connection.on("connected", () => {
+
+      console.log("Mongo Connected");
+
+    });
 
   } catch (error) {
+    mongoose.connection.on("error", err => {
+      console.error(err);
+    });
 
-    console.error(
-      "Database Connection Failed",
-      error
-    );
+    mongoose.connection.on("disconnected", () => {
+
+      console.log("Mongo Disconnected");
+
+    });
 
     process.exit(1);
   }
