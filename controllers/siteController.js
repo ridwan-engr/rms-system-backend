@@ -1,13 +1,13 @@
 import { Site } from "../models/Site.js";
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { Socket } from "socket.io";
+//import { Socket } from "socket.io";
 // Create Site
 export const createSite = asyncHandler(async (req, res) => {
 
   const site = await Site.create(req.body);
 
-  req.io.emit("site-created", site);
+  //req.io.emit("site-created", site);
 
   res.status(201).json({
     success: true,
