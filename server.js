@@ -1,41 +1,67 @@
-import dns from "dns"; 
-
+import dns from "dns";
+import http from "http";
+import { Server } from "socket.io";
 import app from "./app.js";
-
 import { connectDatabase } from "./config/db.js";
-
 import { env } from "./config/env.js";
-
 import { logger } from "./utils/logger.js";
 
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+dns.setServers(["8.8.8.8","8.8.4.4"]);
 
-async function startServer() {
+const server = http.createServer(app);
 
-  try {
+const io = new Server(server,{
+    cors:{
+        origin:[
+            "http://localhost:5173",
+            "https://rms-system-3cai.onrender.com"
+        ],
+        credentials:true
+    }
+});
 
-    await connectDatabase();
+app.set("io",io);
 
-    app.listen(
-      env.port,
-      () => {
+app.use((req,res,next)=>{
+    req.io=io;
+    next();
+});
 
-        logger.success(
-          `RMS-SYSTEM Server Running on http://localhost:${env.port}`
-        );
+io.on("connection",(socket)=>{
 
-      }
-    );
+    logger.info(`Socket Connected ${socket.id}`);
 
-  } catch (error) {
+    socket.on("disconnect",()=>{
 
-    logger.error(
-      `Server Startup Failed: ${error.message}`
-    );
+        logger.info(`Socket Disconnected ${socket.id}`);
 
-    process.exit(1);
+    });
 
-  }
+});
+
+async function startServer(){
+
+    try{
+
+        await connectDatabase();
+
+        server.listen(env.port,()=>{
+
+            logger.success(
+                `Server running on port ${env.port}`
+            );
+
+        });
+
+    }
+
+    catch(error){
+
+        logger.error(error.message);
+
+        process.exit(1);
+
+    }
 
 }
 
